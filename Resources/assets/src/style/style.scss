@@ -1,0 +1,56 @@
+/*
+ * This file is part of the `scopeli/ux-bpmn` project.
+ *
+ * (c) https://github.com/scope-li/ux-bpmn/graphs/contributors
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
+#bpmn-viewer {
+  height: 100%;
+}
+
+#bpmn-modeler {
+  height: 100%;
+  border: solid 1px #ccc;
+
+  #bpmn-menu {
+    height: 48px;
+    border-bottom: solid 1px #ccc;
+
+    button {
+      height: 48px;
+      width: 48px;
+      background-color: unset;
+      border: none;
+      text-decoration: none;
+      color: #666666;
+    }
+
+    button:hover {
+      background: #dedede;
+      color: #333333;
+    }
+  }
+
+  #bpmn-show-xml {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: break-spaces;
+  }
+
+  #bpmn-body {
+    height: calc(100% - 48px);
+    display: flex;
+
+    #bpmn-container {
+      flex-grow: 1;
+    }
+
+    #bpmn-properties-panel {
+      background: #f8f8f8;
+      border-left: solid 1px #ccc;
+    }
+  }
+}
