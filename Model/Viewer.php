@@ -11,13 +11,21 @@
 
 namespace Scopeli\UxBpmn\Model;
 
-class Viewer
+class Viewer extends AbstractModel
 {
     public const TYPE_DEFAULT = 'default';
     public const TYPE_NAVIGATED = 'navigated';
 
-    public function __construct(string $type)
+    protected array $config = [
+        'flow' => [],
+        'flow_class' => 'highlight-flow',
+        'current' => [],
+        'current_class' => 'highlight-current',
+    ];
+
+    public function __construct(string $type, string $xml)
     {
         $this->type = $type;
+        $this->xml = $xml;
     }
 }

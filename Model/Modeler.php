@@ -11,13 +11,36 @@
 
 namespace Scopeli\UxBpmn\Model;
 
-class Modeler
+class Modeler extends AbstractModel
 {
     public const TYPE_DEFAULT = 'default';
-    public const TYPE_NAVIGATED = 'navigated';
-    
-    public function __construct(string $type)
+    public const TYPE_CAMUNDA = 'camunda';
+
+    protected array $config = [
+        'saveUrl' => null,
+        'menu' => [
+            'saveBpmn' => [
+                'title' => 'Save',
+                'icon' => 'fas fa-save'
+            ],
+            'downloadBpmn' => [
+                'title' => 'Download BPMN',
+                'icon' => 'fas fa-download'
+            ],
+            'downloadSvg' => [
+                'title' => 'Download SVG',
+                'icon' => 'fas fa-image'
+            ],
+            'showXml' => [
+                'title' => 'XML',
+                'icon' => 'fas fa-code'
+            ],
+        ]
+    ];
+
+    public function __construct(string $type, string $xml)
     {
         $this->type = $type;
+        $this->xml = $xml;
     }
 }

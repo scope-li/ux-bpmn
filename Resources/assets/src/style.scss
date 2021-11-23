@@ -9,6 +9,18 @@
 
 #bpmn-viewer {
   height: 100%;
+
+  .djs-element.highlight-flow {
+    .djs-visual > :nth-child(1) {
+      stroke: #ff6f00 !important;
+    }
+  }
+
+  .djs-element.highlight-current {
+    .djs-visual > :nth-child(1) {
+      fill: #b2ebf2 !important;
+    }
+  }
 }
 
 #bpmn-modeler {
@@ -35,8 +47,8 @@
   }
 
   #bpmn-show-xml {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    margin: 0.5rem;
+    font-size: 0.75rem;
     white-space: break-spaces;
   }
 
@@ -50,6 +62,7 @@
 
     #bpmn-properties-panel {
       background: #f8f8f8;
+      max-width: 20%;
       border-left: solid 1px #ccc;
     }
   }

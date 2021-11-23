@@ -9,45 +9,43 @@
 
 'use strict';
 
-import {Controller} from 'stimulus';
-import NavigatedViewer from "bpmn-js/lib/NavigatedViewer";
-import createElement from "./helper/CreateElement";
+import { Controller } from 'stimulus';
+import Viewer from 'bpmn-js/lib/Viewer';
+import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer';
 
-import 'bpmn-js/dist/assets/diagram-js.css';
-import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
-
-import "./style/style.scss";
+import '@scopeli/ux-bpmn/src/style.css';
 
 export default class extends Controller {
-    static values = {
-        diagram: String,
-        currentId: String,
-        flowPath: Array,
-    }
-
     connect() {
-        const elContainer = createElement('div', {id: 'bpmn-container'});
-        const elViewer = createElement('div', {id: 'bpmn-viewer'}, elContainer);
+        const payload = JSON.parse(this.element.getAttribute('data-view'));
 
-        this.element.appendChild(elViewer);
+        if('navigated' === payload.type) {
+            var viewer = new NavigatedViewer({
+                container: '#bpmn-viewer'
+            });
+        } else {
+            var viewer = new Viewer({
+                container: '#bpmn-viewer'
+            });
+        }
+
+        this.loadDiagram(viewer, payload);
     }
 
-    render() {
-        this.viewer = new NavigatedViewer({
-            container: '#bpmn-viewer'
-        });
-
-        const controller = this;
-        const diagram = this.diagramValue;
-
-        controller.openDiagram(diagram);
-    }
-
-    async openDiagram(bpmnXML) {
+    async loadDiagram(viewer, payload) {
         try {
-            await this.viewer.importXML(bpmnXML);
-            var canvas = this.viewer.get('canvas');
+            await viewer.importXML(payload.xml);
+
+            const canvas = viewer.get('canvas');
             canvas.zoom('fit-viewport');
+
+            for (var i = 0; i < payload.config.flow.length; i++) {
+                canvas.addMarker(payload.config.flow[i], payload.config.flow_class);
+            }
+
+            for (var i = 0; i < payload.config.current.length; i++) {
+                canvas.addMarker(payload.config.current[i], payload.config.current_class);
+            }
         } catch (err) {
             console.error('could not import BPMN 2.0 diagram', err);
         }

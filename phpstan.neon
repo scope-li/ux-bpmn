@@ -1,0 +1,10 @@
+parameters:
+    level: 8
+    checkMissingIterableValueType: false
+    paths:
+        - .
+    excludePaths:
+        - vendor
+        - Resources/assets/node_modules/
+    ignoreErrors:
+        - '#Function twig_escape_filter not found\.#'

@@ -12,35 +12,36 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Urs Kobald",
-      "email": "urskobald@gmail.com"
-    },
-    {
-      "name": "Scope GmbH Community",
+      "name": "Scope GmbH",
       "homepage": "https://www.scope.li"
     }
   ],
   "autoload": {
     "psr-4": {
       "Scopeli\\UxBpmn\\": ""
-    },
-    "exclude-from-classmap": [
-      "/Tests/"
-    ]
+    }
   },
   "require": {
     "php": ">=7.4",
     "symfony/config": "^4.4.17|^5.0|^6.0",
     "symfony/dependency-injection": "^4.4.17|^5.0|^6.0",
-    "symfony/http-kernel": "^4.4.17|^5.0|^6.0"
+    "symfony/http-kernel": "^4.4.17|^5.0|^6.0",
+    "symfony/twig-bundle": "^4.4.17|^5.0|^6.0"
   },
   "require-dev": {
     "symfony/framework-bundle": "^4.4.17|^5.0|^6.0",
-    "symfony/phpunit-bridge": "^5.2|^6.0",
-    "symfony/twig-bundle": "^4.4.17|^5.0|^6.0",
     "symfony/var-dumper": "^4.4.17|^5.0|^6.0"
   },
   "conflict": {
     "symfony/flex": "<1.13"
+  },
+  "scripts": {
+    "phpstan": [
+      "phpstan analyse"
+    ],
+    "php-cs-fixer": [
+      "php-cs-fixer fix src/",
+      "php-cs-fixer fix tests/"
+    ]
   }
 }

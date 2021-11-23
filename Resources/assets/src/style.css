@@ -1,0 +1,57 @@
+/*
+ * This file is part of the `scopeli/ux-bpmn` project.
+ *
+ * (c) https://github.com/scope-li/ux-bpmn/graphs/contributors
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+#bpmn-viewer {
+  height: 100%;
+}
+#bpmn-viewer .djs-element.highlight-flow .djs-visual > :nth-child(1) {
+  stroke: #ff6f00 !important;
+}
+#bpmn-viewer .djs-element.highlight-current .djs-visual > :nth-child(1) {
+  fill: #b2ebf2 !important;
+}
+
+#bpmn-modeler {
+  height: 100%;
+  border: solid 1px #ccc;
+}
+#bpmn-modeler #bpmn-menu {
+  height: 48px;
+  border-bottom: solid 1px #ccc;
+}
+#bpmn-modeler #bpmn-menu button {
+  height: 48px;
+  width: 48px;
+  background-color: unset;
+  border: none;
+  text-decoration: none;
+  color: #666666;
+}
+#bpmn-modeler #bpmn-menu button:hover {
+  background: #dedede;
+  color: #333333;
+}
+#bpmn-modeler #bpmn-show-xml {
+  margin: 0.5rem;
+  font-size: 0.75rem;
+  white-space: break-spaces;
+}
+#bpmn-modeler #bpmn-body {
+  height: calc(100% - 48px);
+  display: flex;
+}
+#bpmn-modeler #bpmn-body #bpmn-container {
+  flex-grow: 1;
+}
+#bpmn-modeler #bpmn-body #bpmn-properties-panel {
+  background: #f8f8f8;
+  max-width: 20%;
+  border-left: solid 1px #ccc;
+}
+
+/*# sourceMappingURL=style.css.map */
