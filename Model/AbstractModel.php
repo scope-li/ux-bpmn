@@ -13,9 +13,6 @@ namespace Scopeli\UxBpmn\Model;
 
 abstract class AbstractModel
 {
-    public const TYPE_DEFAULT = 'default';
-    public const TYPE_NAVIGATED = 'navigated';
-
     protected string $type;
     protected string $xml;
     protected array $config = [];
@@ -38,6 +35,11 @@ abstract class AbstractModel
     public function getType(): string
     {
         return $this->type;
+    }
+
+    public function getXml(): string
+    {
+        return $this->xml;
     }
 
     public function getConfig(): array

@@ -23,19 +23,19 @@ class BpmnExtension extends AbstractExtension
     {
         return [
             new TwigFunction(
-                'render_viewer',
-                [$this, 'renderViewer'],
+                'render_bpmn_viewer',
+                [$this, 'renderBpmnViewer'],
                 ['needs_environment' => true, 'is_safe' => ['html']]
             ),
             new TwigFunction(
-                'render_modeler',
-                [$this, 'renderModeler'],
+                'render_bpmn_modeler',
+                [$this, 'renderBpmnModeler'],
                 ['needs_environment' => true, 'is_safe' => ['html']]
             ),
         ];
     }
 
-    public function renderViewer(Environment $env, Viewer $viewer, array $attributes = []): string
+    public function renderBpmnViewer(Environment $env, Viewer $viewer, array $attributes = []): string
     {
         $viewer->setAttributes($attributes);
 
@@ -49,7 +49,7 @@ class BpmnExtension extends AbstractExtension
         return trim($html);
     }
 
-    public function renderModeler(Environment $env, Modeler $modeler, array $attributes = []): string
+    public function renderBpmnModeler(Environment $env, Modeler $modeler, array $attributes = []): string
     {
         $modeler->setAttributes($attributes);
 
