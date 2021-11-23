@@ -78,6 +78,11 @@ var _default = /*#__PURE__*/function (_Controller) {
 
       var payload = JSON.parse(this.element.getAttribute('data-view'));
       this.saveUrl = payload.config.saveUrl;
+
+      this._dispatchEvent('bpmn-modeler:pre-connect', {
+        payload: payload
+      }, true);
+
       var modelerConfig = {
         container: '#bpmn-container',
         width: '100%',
@@ -114,6 +119,10 @@ var _default = /*#__PURE__*/function (_Controller) {
       })["catch"](function (err) {
         console.log(err);
       });
+
+      this._dispatchEvent('bpmn-modeler:connect', {
+        modeler: this.modeler
+      }, true);
     }
   }, {
     key: "saveBpmn",
@@ -175,7 +184,8 @@ var _default = /*#__PURE__*/function (_Controller) {
               case 2:
                 _yield$this$modeler$s2 = _context2.sent;
                 xml = _yield$this$modeler$s2.xml;
-                this.download('diagram.bpmn', xml);
+
+                this._download('diagram.bpmn', xml);
 
               case 5:
               case "end":
@@ -209,7 +219,8 @@ var _default = /*#__PURE__*/function (_Controller) {
               case 2:
                 _yield$this$modeler$s3 = _context3.sent;
                 svg = _yield$this$modeler$s3.svg;
-                this.download('diagram.svg', svg);
+
+                this._download('diagram.svg', svg);
 
               case 5:
               case "end":
@@ -277,8 +288,8 @@ var _default = /*#__PURE__*/function (_Controller) {
       return showXml;
     }()
   }, {
-    key: "download",
-    value: function download(name, data) {
+    key: "_download",
+    value: function _download(name, data) {
       var encodedData = encodeURIComponent(data);
       var link = document.createElement('a');
       link.href = 'data:application/bpmn20-xml;charset=UTF-8,' + encodedData;
@@ -286,6 +297,16 @@ var _default = /*#__PURE__*/function (_Controller) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    }
+  }, {
+    key: "_dispatchEvent",
+    value: function _dispatchEvent(name) {
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var canBubble = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var cancelable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      var userEvent = document.createEvent('CustomEvent');
+      userEvent.initCustomEvent(name, canBubble, cancelable, payload);
+      this.element.dispatchEvent(userEvent);
     }
   }]);
   return _default;

@@ -56,6 +56,10 @@ var _default = /*#__PURE__*/function (_Controller) {
     value: function connect() {
       var payload = JSON.parse(this.element.getAttribute('data-view'));
 
+      this._dispatchEvent('bpmn-viewer:pre-connect', {
+        payload: payload
+      }, true);
+
       if ('navigated' === payload.type) {
         var viewer = new _NavigatedViewer["default"]({
           container: '#bpmn-viewer'
@@ -67,6 +71,10 @@ var _default = /*#__PURE__*/function (_Controller) {
       }
 
       this.loadDiagram(viewer, payload);
+
+      this._dispatchEvent('bpmn-viewer:connect', {
+        viewer: viewer
+      }, true);
     }
   }, {
     key: "loadDiagram",
@@ -115,6 +123,16 @@ var _default = /*#__PURE__*/function (_Controller) {
 
       return loadDiagram;
     }()
+  }, {
+    key: "_dispatchEvent",
+    value: function _dispatchEvent(name) {
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var canBubble = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var cancelable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      var userEvent = document.createEvent('CustomEvent');
+      userEvent.initCustomEvent(name, canBubble, cancelable, payload);
+      this.element.dispatchEvent(userEvent);
+    }
   }]);
   return _default;
 }(_stimulus.Controller);

@@ -32,6 +32,8 @@ export default class extends Controller {
         const payload = JSON.parse(this.element.getAttribute('data-view'));
         this.saveUrl = payload.config.saveUrl;
 
+        this._dispatchEvent('bpmn-modeler:pre-connect', { payload }, true);
+
         const modelerConfig = {
             container: '#bpmn-container',
             width: '100%',
@@ -71,6 +73,8 @@ export default class extends Controller {
             .catch(err => {
                 console.log(err);
             });
+
+        this._dispatchEvent('bpmn-modeler:connect', { modeler: this.modeler }, true);
     }
 
     async saveBpmn() {
@@ -87,12 +91,12 @@ export default class extends Controller {
 
     async downloadBpmn() {
         const { xml } = await this.modeler.saveXML({ format: true });
-        this.download('diagram.bpmn', xml);
+        this._download('diagram.bpmn', xml);
     }
 
     async downloadSvg() {
         const { svg } = await this.modeler.saveSVG({ format: true });
-        this.download('diagram.svg', svg);
+        this._download('diagram.svg', svg);
     }
 
     async showXml() {
@@ -111,7 +115,7 @@ export default class extends Controller {
         }
     }
 
-    download(name, data) {
+    _download(name, data) {
         const encodedData = encodeURIComponent(data);
         const link = document.createElement('a');
         link.href = 'data:application/bpmn20-xml;charset=UTF-8,' + encodedData;
@@ -119,5 +123,12 @@ export default class extends Controller {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    }
+
+    _dispatchEvent(name, payload = null, canBubble = false, cancelable = false) {
+        const userEvent = document.createEvent('CustomEvent');
+        userEvent.initCustomEvent(name, canBubble, cancelable, payload);
+
+        this.element.dispatchEvent(userEvent);
     }
 }
