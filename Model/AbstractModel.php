@@ -20,7 +20,7 @@ abstract class AbstractModel
     protected string $xml;
     protected array $config = [];
     protected array $attributes = [];
-    
+
     public function createView(): array
     {
         return [

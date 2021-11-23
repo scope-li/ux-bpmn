@@ -21,21 +21,21 @@ class Modeler extends AbstractModel
         'menu' => [
             'saveBpmn' => [
                 'title' => 'Save',
-                'icon' => 'fas fa-save'
+                'icon' => 'fas fa-save',
             ],
             'downloadBpmn' => [
                 'title' => 'Download BPMN',
-                'icon' => 'fas fa-download'
+                'icon' => 'fas fa-download',
             ],
             'downloadSvg' => [
                 'title' => 'Download SVG',
-                'icon' => 'fas fa-image'
+                'icon' => 'fas fa-image',
             ],
             'showXml' => [
                 'title' => 'XML',
-                'icon' => 'fas fa-code'
+                'icon' => 'fas fa-code',
             ],
-        ]
+        ],
     ];
 
     public function __construct(string $type, string $xml)

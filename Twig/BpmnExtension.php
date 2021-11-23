@@ -38,7 +38,7 @@ class BpmnExtension extends AbstractExtension
     public function renderViewer(Environment $env, Viewer $viewer, array $attributes = []): string
     {
         $viewer->setAttributes($attributes);
-        
+
         $html = sprintf(
             '<div id="bpmn-viewer" data-controller="%s" data-view="%s" %s></div>',
             $viewer->getDataController() ?? 'scopeli--ux-bpmn--viewer',
@@ -52,7 +52,7 @@ class BpmnExtension extends AbstractExtension
     public function renderModeler(Environment $env, Modeler $modeler, array $attributes = []): string
     {
         $modeler->setAttributes($attributes);
-        
+
         $html = sprintf(
             '<div id="bpmn-modeler" data-controller="%s" data-view="%s" %s>'.
             '%s<div id="bpmn-show-xml" style="display: none;"></div>'.
@@ -72,10 +72,10 @@ class BpmnExtension extends AbstractExtension
         $config = $modeler->getConfig();
         $html = '';
 
-        if (isset($config['menu']) && is_array($config['menu'])) {
+        if (isset($config['menu']) && \is_array($config['menu'])) {
             foreach ($config['menu'] as $key => $menu) {
-                if (in_array($key, ['saveBpmn', 'downloadBpmn', 'downloadSvg', 'showXml'])) {
-                    if ('saveBpmn' === $key && is_null($config['saveUrl'])) {
+                if (\in_array($key, ['saveBpmn', 'downloadBpmn', 'downloadSvg', 'showXml'])) {
+                    if ('saveBpmn' === $key && null === $config['saveUrl']) {
                         continue;
                     }
 
