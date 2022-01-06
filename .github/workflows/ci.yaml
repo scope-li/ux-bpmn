@@ -1,0 +1,24 @@
+name: UX BPMN
+
+on: [push, pull_request]
+
+jobs:
+  coding-style-php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+      - name: php-cs-fixer
+        run: |
+          wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.4.0/php-cs-fixer.phar -q
+          php php-cs-fixer.phar fix --dry-run --diff
+
+  coding-style-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: cd Resources/assets && yarn
+      - run: cd Resources/assets && yarn check-lint

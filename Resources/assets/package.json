@@ -22,7 +22,8 @@
   "scripts": {
     "build": "babel src -d dist",
     "watch": "babel --watch src -d dist",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "check-lint": "yarn lint --no-fix"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",

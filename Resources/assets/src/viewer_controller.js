@@ -21,12 +21,12 @@ export default class extends Controller {
 
         this._dispatchEvent('bpmn-viewer:pre-connect', { payload }, true);
 
+        var viewer = new Viewer({
+            container: '#bpmn-viewer'
+        });
+
         if('navigated' === payload.type) {
-            var viewer = new NavigatedViewer({
-                container: '#bpmn-viewer'
-            });
-        } else {
-            var viewer = new Viewer({
+            viewer = new NavigatedViewer({
                 container: '#bpmn-viewer'
             });
         }
@@ -43,12 +43,12 @@ export default class extends Controller {
             const canvas = viewer.get('canvas');
             canvas.zoom('fit-viewport');
 
-            for (var i = 0; i < payload.config.flow.length; i++) {
-                canvas.addMarker(payload.config.flow[i], payload.config.flow_class);
+            for (var flowCount = 0; flowCount < payload.config.flow.length; flowCount++) {
+                canvas.addMarker(payload.config.flow[flowCount], payload.config.flow_class);
             }
 
-            for (var i = 0; i < payload.config.current.length; i++) {
-                canvas.addMarker(payload.config.current[i], payload.config.current_class);
+            for (var currentCount = 0; currentCount < payload.config.current.length; currentCount++) {
+                canvas.addMarker(payload.config.current[currentCount], payload.config.current_class);
             }
         } catch (err) {
             console.error('could not import BPMN 2.0 diagram', err);

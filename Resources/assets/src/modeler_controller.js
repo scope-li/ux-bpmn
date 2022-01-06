@@ -102,7 +102,7 @@ export default class extends Controller {
     async showXml() {
         const elShowXml = document.getElementById('bpmn-show-xml');
         const elBody = document.getElementById('bpmn-body');
-        
+
         if (elShowXml.style.display === 'none') {
             const { xml } = await this.modeler.saveXML({ format: true });
             elShowXml.innerHTML = Prism.highlight(xml, Prism.languages.xml, 'xml');
