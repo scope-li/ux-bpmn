@@ -60,12 +60,12 @@ var _default = /*#__PURE__*/function (_Controller) {
         payload: payload
       }, true);
 
+      var viewer = new _Viewer["default"]({
+        container: '#bpmn-viewer'
+      });
+
       if ('navigated' === payload.type) {
-        var viewer = new _NavigatedViewer["default"]({
-          container: '#bpmn-viewer'
-        });
-      } else {
-        var viewer = new _Viewer["default"]({
+        viewer = new _NavigatedViewer["default"]({
           container: '#bpmn-viewer'
         });
       }
@@ -80,7 +80,7 @@ var _default = /*#__PURE__*/function (_Controller) {
     key: "loadDiagram",
     value: function () {
       var _loadDiagram = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(viewer, payload) {
-        var canvas, i;
+        var canvas, flowCount, currentCount;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -93,12 +93,12 @@ var _default = /*#__PURE__*/function (_Controller) {
                 canvas = viewer.get('canvas');
                 canvas.zoom('fit-viewport');
 
-                for (i = 0; i < payload.config.flow.length; i++) {
-                  canvas.addMarker(payload.config.flow[i], payload.config.flow_class);
+                for (flowCount = 0; flowCount < payload.config.flow.length; flowCount++) {
+                  canvas.addMarker(payload.config.flow[flowCount], payload.config.flow_class);
                 }
 
-                for (i = 0; i < payload.config.current.length; i++) {
-                  canvas.addMarker(payload.config.current[i], payload.config.current_class);
+                for (currentCount = 0; currentCount < payload.config.current.length; currentCount++) {
+                  canvas.addMarker(payload.config.current[currentCount], payload.config.current_class);
                 }
 
                 _context.next = 12;
