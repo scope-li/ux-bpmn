@@ -23,8 +23,7 @@
     "build": "babel src -d dist",
     "watch": "babel --watch src -d dist",
     "lint": "eslint src",
-    "check-lint": "yarn lint --no-fix",
-    "check-format": "yarn format --no-write --check"
+    "check-lint": "yarn lint --no-fix"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
