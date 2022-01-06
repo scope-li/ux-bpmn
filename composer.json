@@ -1,7 +1,7 @@
 {
   "name": "scopeli/ux-bpmn",
   "type": "symfony-bundle",
-  "description": "BPMN Viewer and Editor for Symfony applications",
+  "description": "BPMN viewer and modeler for Symfony applications",
   "keywords": [
     "symfony-ux",
     "symfony",
