@@ -1,5 +1,8 @@
-[![UX BPMN](https://github.com/scope-li/ux-bpmn/actions/workflows/ci.yaml/badge.svg)](https://github.com/scope-li/ux-bpmn/actions/workflows/ci.yaml)
 # UX BPMN
+[![Total Downloads](http://poser.pugx.org/scopeli/ux-bpmn/downloads)](https://packagist.org/packages/scopeli/ux-bpmn)
+[![Daily Downloads](http://poser.pugx.org/scopeli/ux-bpmn/d/daily)](https://packagist.org/packages/scopeli/ux-bpmn)
+[![UX BPMN](https://github.com/scope-li/ux-bpmn/actions/workflows/ci.yaml/badge.svg)](https://github.com/scope-li/ux-bpmn/actions/workflows/ci.yaml)
+
 UX BPMN is a Symfony bundle that integrating the [bpmn.io](https://bpmn.io/) library in Symfony applications. 
 It provides a viewer and modeler.
 
