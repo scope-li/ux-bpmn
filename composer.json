@@ -1,7 +1,7 @@
 {
   "name": "scopeli/ux-bpmn",
   "type": "symfony-bundle",
-  "description": "BPMN Viewer and Editor for Symfony based on bpmn-js",
+  "description": "BPMN Viewer and Editor for Symfony applications",
   "keywords": [
     "symfony-ux",
     "symfony",
@@ -24,14 +24,14 @@
   "require": {
     "php": ">=7.4.5",
     "ext-json": "*",
-    "symfony/config": "^4.4.17|^5.0|^6.0",
-    "symfony/dependency-injection": "^4.4.17|^5.0|^6.0",
-    "symfony/http-kernel": "^4.4.17|^5.0|^6.0",
-    "symfony/twig-bundle": "^4.4.17|^5.0|^6.0"
+    "symfony/config": "^4.4|^5.0|^6.0",
+    "symfony/dependency-injection": "^4.4|^5.0|^6.0",
+    "symfony/http-kernel": "^4.4|^5.0|^6.0",
+    "symfony/twig-bundle": "^4.4|^5.0|^6.0"
   },
   "require-dev": {
-    "symfony/framework-bundle": "^4.4.17|^5.0|^6.0",
-    "symfony/var-dumper": "^4.4.17|^5.0|^6.0"
+    "symfony/framework-bundle": "^4.4|^5.0|^6.0",
+    "symfony/var-dumper": "^4.4|^5.0|^6.0"
   },
   "conflict": {
     "symfony/flex": "<1.13"
