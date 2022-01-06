@@ -1,6 +1,15 @@
 <?php
 
-namespace Model;
+/*
+ * This file is part of the `scopeli/ux-bpmn` project.
+ *
+ * (c) https://github.com/scope-li/ux-bpmn/graphs/contributors
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
+namespace Scopeli\UxBpmn\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use Scopeli\UxBpmn\Model\Modeler;

@@ -11,8 +11,13 @@
 
 namespace Scopeli\UxBpmn;
 
+use Scopeli\UxBpmn\DependencyInjection\UxBpmnExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class UxBpmnBundle extends Bundle
 {
+    public function getContainerExtension(): UxBpmnExtension
+    {
+        return new UxBpmnExtension();
+    }
 }
