@@ -6,6 +6,8 @@
 UX BPMN is a Symfony bundle that integrating the [bpmn.io](https://bpmn.io/) library in Symfony applications. 
 It provides a viewer and modeler.
 
+You can checkout the [demo](https://github.com/scope-li/ux-bpmn-demo) for testing.
+
 ## Installation
 
 UX BPMN requires PHP 7.4.5+ and Symfony 4.4+.
