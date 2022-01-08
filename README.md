@@ -61,7 +61,7 @@ class BpmnController extends AbstractController
     /**
      * @Route("/save", name="bpmn_save", methods={"POST"}) 
      */
-    public function edit(Request $request): Response
+    public function save(Request $request): Response
     {
         $data = json_decode($request->getContent());
         
