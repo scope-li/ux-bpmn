@@ -24,25 +24,36 @@
   "require": {
     "php": ">=7.4.5",
     "ext-json": "*",
-    "symfony/config": "^4.4|^5.0|^6.0",
-    "symfony/dependency-injection": "^4.4|^5.0|^6.0",
-    "symfony/http-kernel": "^4.4|^5.0|^6.0",
-    "symfony/twig-bundle": "^4.4|^5.0|^6.0"
+    "symfony/config": "^4.4|^5.4|^6.0",
+    "symfony/dependency-injection": "^4.4|^5.4|^6.0",
+    "symfony/http-kernel": "^4.4|^5.4|^6.0",
+    "symfony/twig-bundle": "^4.4|^5.4|^6.0"
   },
   "require-dev": {
-    "symfony/framework-bundle": "^4.4|^5.0|^6.0",
-    "symfony/var-dumper": "^4.4|^5.0|^6.0"
+    "symfony/var-dumper": "^4.4|^5.4|^6.0",
+    "phpunit/phpunit": "^9.5",
+    "friendsofphp/php-cs-fixer": "^3.4",
+    "phpstan/phpstan": "^1.3"
   },
   "conflict": {
     "symfony/flex": "<1.13"
   },
   "scripts": {
     "phpstan": [
-      "phpstan analyse"
+      "php vendor/bin/phpstan"
+    ],
+    "phpunit": [
+      "php vendor/bin/phpunit"
+    ],
+    "phpunit-coverage": [
+      "XDEBUG_MODE=coverage php vendor/bin/phpunit"
+    ],
+    "test": [
+      "@phpstan",
+      "@phpunit"
     ],
     "php-cs-fixer": [
-      "php-cs-fixer fix src/",
-      "php-cs-fixer fix tests/"
+      " php vendor/bin/php-cs-fixer fix"
     ]
   }
 }

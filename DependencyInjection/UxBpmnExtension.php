@@ -25,8 +25,7 @@ class UxBpmnExtension extends Extension
             $container
                 ->setDefinition('bpmn.twig_extension', new Definition(BpmnExtension::class))
                 ->addTag('twig.extension')
-                ->setPublic(false)
-            ;
+                ->setPublic('test' === $container->getParameter('kernel.environment'));
         }
     }
 }

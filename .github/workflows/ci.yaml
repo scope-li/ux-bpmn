@@ -3,7 +3,7 @@ name: UX BPMN
 on: [push, pull_request]
 
 jobs:
-  coding-style-php:
+  static-test-php:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -11,14 +11,58 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
+          tools: php-cs-fixer, phpstan
+      - name: Install vendors
+        run: composer update --prefer-lowest --prefer-dist --no-interaction --no-ansi --no-progress
       - name: php-cs-fixer
-        run: |
-          wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.4.0/php-cs-fixer.phar -q
-          php php-cs-fixer.phar fix --dry-run --diff
+        run: php-cs-fixer fix --dry-run --diff
+      - name: phpstan
+        run: phpstan
 
-  coding-style-js:
+  static-test-js:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: cd Resources/assets && yarn
-      - run: cd Resources/assets && yarn check-lint
+      - run: |
+          cd Resources/assets
+          yarn
+          yarn check-lint
+
+  tests-php74-low-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: phpunit
+      - name: PHP 7.4 and lowest
+        run: |
+          composer update --prefer-lowest --prefer-dist --no-interaction --no-ansi --no-progress
+          phpunit
+
+  tests-php80-low-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: phpunit
+      - name: PHP 8.0 and lowest
+        run: |
+          composer update --prefer-lowest --prefer-dist --no-interaction --no-ansi --no-progress
+          phpunit
+
+  tests-php80-high-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: phpunit
+      - name: PHP 8.0 and highest
+        run: |
+          composer update --prefer-dist --no-interaction --no-ansi --no-progress
+          phpunit
