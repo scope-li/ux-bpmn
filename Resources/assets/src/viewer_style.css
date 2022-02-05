@@ -1,0 +1,22 @@
+/*
+ * This file is part of the `scopeli/ux-bpmn` project.
+ *
+ * (c) https://github.com/scope-li/ux-bpmn/graphs/contributors
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+#bpmn-viewer {
+  height: 100%;
+}
+#bpmn-viewer .djs-element.highlight-flow .djs-visual > :nth-child(1) {
+  stroke: #6200ee !important;
+}
+#bpmn-viewer .djs-element.highlight-current .djs-visual > :nth-child(1) {
+  fill: #3700b3 !important;
+}
+#bpmn-viewer .djs-element.highlight-current .djs-visual .djs-label > :nth-child(1) {
+  fill: #ffffff !important;
+}
+
+/*# sourceMappingURL=viewer_style.css.map */

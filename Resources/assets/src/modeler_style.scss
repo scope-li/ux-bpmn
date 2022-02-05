@@ -6,42 +6,44 @@
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
-
-#bpmn-viewer {
-  height: 100%;
-
-  .djs-element.highlight-flow {
-    .djs-visual > :nth-child(1) {
-      stroke: #ff6f00 !important;
-    }
-  }
-
-  .djs-element.highlight-current {
-    .djs-visual > :nth-child(1) {
-      fill: #b2ebf2 !important;
-    }
-  }
-}
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import 'bpmn-js/dist/assets/diagram-js.css';
+@import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
+@import 'bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
+@import 'prismjs/themes/prism.css';
 
 #bpmn-modeler {
   height: 100%;
   border: solid 1px #ccc;
 
   #bpmn-menu {
-    height: 48px;
+    height: 49px;
     border-bottom: solid 1px #ccc;
 
     button {
-      height: 48px;
-      width: 48px;
+      height: 44px;
+      width: 44px;
+      margin: 2px;
       background-color: unset;
       border: none;
       text-decoration: none;
       color: #666666;
+      border-left: solid 1px #e0e0e0;
+      border-top: solid 1px #e0e0e0;
+      border-right: solid 1px #666;
+      border-bottom: solid 1px #666;
+    }
+
+    button.active {
+      background: #dedede;
+      border-left: solid 1px #666;
+      border-top: solid 1px #666;
+      border-right: solid 1px #e0e0e0;
+      border-bottom: solid 1px #e0e0e0;
     }
 
     button:hover {
-      background: #dedede;
+      background: #eeeeee;
       color: #333333;
     }
   }

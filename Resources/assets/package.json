@@ -9,45 +9,54 @@
         "main": "dist/modeler_controller.js",
         "webpackMode": "eager",
         "fetch": "eager",
-        "enabled": true
+        "enabled": true,
+        "autoimport": {
+          "@scopeli/ux-bpmn/src/modeler_style.css": true
+        }
       },
       "viewer": {
         "main": "dist/viewer_controller.js",
         "webpackMode": "eager",
         "fetch": "eager",
-        "enabled": true
+        "enabled": true,
+        "autoimport": {
+          "@scopeli/ux-bpmn/src/viewer_style.css": true
+        }
       }
     }
   },
   "scripts": {
-    "build": "babel src -d dist",
-    "watch": "babel --watch src -d dist",
+    "tsc:watch": "tsc --watch",
+    "tsc:build": "tsc --build",
+    "sass": "sass src:src",
     "lint": "eslint src",
     "check-lint": "yarn lint --no-fix"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "axios": "^0.24.0",
-    "bpmn-js": "^8.8.2",
+    "@hotwired/stimulus": "^3.0.0",
+    "axios": "^0.25.0",
+    "bpmn-js": "^8.9.1",
     "bpmn-js-properties-panel": "^0.46.0",
     "camunda-bpmn-moddle": "^6.1.1",
-    "prismjs": "^1.25.0"
+    "prismjs": "^1.26.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
-    "@babel/eslint-parser": "^7.16.3",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.16.4",
-    "@babel/preset-env": "^7.12.7",
-    "@babel/runtime": "^7.16.3",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/runtime": "^7.17.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "axios": "^0.24.0",
-    "bpmn-js": "^8.8.2",
+    "@hotwired/stimulus": "^3.0.0",
+    "@types/prismjs": "^1.26.0",
+    "axios": "^0.25.0",
+    "bpmn-js": "^8.9.1",
     "bpmn-js-properties-panel": "^0.46.0",
     "camunda-bpmn-moddle": "^6.1.1",
     "eslint": "^8.3.0",
-    "prismjs": "^1.25.0",
-    "stimulus": "^2.0.0"
+    "prismjs": "^1.26.0",
+    "rollup": "^2.67.0",
+    "sass": "^1.49.7",
+    "typescript": "^4.5.5"
   }
 }
