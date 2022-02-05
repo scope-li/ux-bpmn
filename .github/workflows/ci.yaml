@@ -26,7 +26,7 @@ jobs:
       - run: |
           cd Resources/assets
           yarn
-          yarn check-lint
+          yarn lint:check
 
   tests-php74-low-deps:
     runs-on: ubuntu-latest
