@@ -131,8 +131,17 @@ export default class extends Controller {
     }
 
     async showXml(event: PointerEvent) {
-        const elShowXml: HTMLElement = document.getElementById('bpmn-show-xml')!;
-        const elBody: HTMLElement = document.getElementById('bpmn-body')!;
+        const elShowXml: HTMLElement | null = document.getElementById('bpmn-show-xml');
+        if (elShowXml === null) {
+            new Error('No element with id "bpmn-show-xml" found.');
+            return;
+        }
+
+        const elBody: HTMLElement | null = document.getElementById('bpmn-body');
+        if (elBody === null) {
+            new Error('No element with id "bpmn-show-xml" found.');
+            return;
+        }
 
         if (elShowXml.style.display === 'none') {
             const { xml } = await this.modeler.saveXML({ format: true });
@@ -158,7 +167,7 @@ export default class extends Controller {
         document.body.removeChild(link);
     }
 
-    _dispatchEvent(name: string, payload: Modeler | ModelerPayload, bubbles:boolean = false) {
+    _dispatchEvent(name: string, payload: Modeler | ModelerPayload, bubbles = false) {
         this.element.dispatchEvent(new CustomEvent(name, {detail: payload, bubbles: bubbles}));
     }
 }

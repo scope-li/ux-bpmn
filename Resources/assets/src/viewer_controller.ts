@@ -65,20 +65,20 @@ export default class extends Controller {
                 const canvas = this.viewer.get('canvas');
                 canvas.zoom('fit-viewport');
 
-                for (var flowCount = 0; flowCount < this.payload.config.flow.length; flowCount++) {
-                    canvas.addMarker(this.payload.config.flow[flowCount], this.payload.config.flow_class);
-                }
+                this.payload.config.flow.forEach(flowId => {
+                    canvas.addMarker(flowId, this.payload.config.flow_class);
+                });
 
-                for (var currentCount = 0; currentCount < this.payload.config.current.length; currentCount++) {
-                    canvas.addMarker(this.payload.config.current[currentCount], this.payload.config.current_class);
-                }
+                this.payload.config.current.forEach(currentId => {
+                    canvas.addMarker(currentId, this.payload.config.current_class);
+                });
             })
             .catch((err: any) => {
                 console.error('Could not import BPMN 2.0 diagram', err);
             });
     }
 
-    _dispatchEvent(name: string, payload: any | ViewerModel, bubbles:boolean = false) {
+    _dispatchEvent(name: string, payload: Viewer | NavigatedViewer | ViewerModel, bubbles = false) {
         this.element.dispatchEvent(new CustomEvent(name, {detail: payload, bubbles: bubbles}));
     }
 }
