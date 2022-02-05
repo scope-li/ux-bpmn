@@ -16,5 +16,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"]
+  "exclude": ["src/**/dist"],
+  "include": ["src/**/*"]
 }

@@ -28,9 +28,9 @@
   "scripts": {
     "tsc:watch": "tsc --watch",
     "tsc:build": "tsc --build",
-    "sass": "sass src:src",
-    "lint": "eslint src",
-    "check-lint": "yarn lint --no-fix"
+    "lint:run": "eslint src",
+    "lint:check": "eslint src --no-fix",
+    "sass": "sass src:src"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -60,7 +60,6 @@
     "eslint-plugin-jest": "^26.0.0",
     "prettier": "^2.5.1",
     "prismjs": "^1.26.0",
-    "rollup": "^2.67.0",
     "sass": "^1.49.7",
     "typescript": "^4.5.5"
   },
@@ -82,17 +81,7 @@
     },
     "env": {
       "browser": true
-    },
-    "overrides": [
-      {
-        "files": [
-          "test/**/*.ts"
-        ],
-        "extends": [
-          "plugin:jest/recommended"
-        ]
-      }
-    ]
+    }
   },
   "prettier": {
     "printWidth": 120,
