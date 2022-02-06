@@ -2,7 +2,7 @@
   "name": "@scopeli/flow-bundle",
   "description": "bpmn-js modeler and viewer",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "symfony": {
     "controllers": {
       "modeler": {
@@ -29,7 +29,9 @@
     "tsc:watch": "tsc --watch",
     "tsc:build": "tsc --build",
     "lint:run": "eslint src",
-    "lint:check": "eslint src --no-fix",
+    "lint:check": "eslint src test --no-fix",
+    "test:watch": "karma start",
+    "test:run": "karma start --single-run",
     "sass": "sass src:src"
   },
   "peerDependencies": {
@@ -48,6 +50,8 @@
     "@babel/runtime": "^7.17.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@hotwired/stimulus": "^3.0.0",
+    "@symfony/stimulus-testing": "^2.0.1",
+    "@types/jasmine": "^3.10.3",
     "@types/prismjs": "^1.26.0",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
@@ -58,10 +62,16 @@
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^26.0.0",
+    "jasmine-core": "^4.0.0",
+    "karma": "^6.3.15",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-webpack": "^5.0.0",
     "prettier": "^2.5.1",
     "prismjs": "^1.26.0",
     "sass": "^1.49.7",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "webpack": "^5.68.0"
   },
   "eslintConfig": {
     "root": true,
@@ -81,7 +91,17 @@
     },
     "env": {
       "browser": true
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.test.js"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "prettier": {
     "printWidth": 120,

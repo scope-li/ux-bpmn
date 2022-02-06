@@ -78,7 +78,15 @@ export default class extends Controller {
     }
     async showXml(event) {
         const elShowXml = document.getElementById('bpmn-show-xml');
+        if (elShowXml === null) {
+            new Error('No element with id "bpmn-show-xml" found.');
+            return;
+        }
         const elBody = document.getElementById('bpmn-body');
+        if (elBody === null) {
+            new Error('No element with id "bpmn-show-xml" found.');
+            return;
+        }
         if (elShowXml.style.display === 'none') {
             const { xml } = await this.modeler.saveXML({ format: true });
             elShowXml.innerHTML = Prism.highlight(xml, Prism.languages.xml, 'xml');
