@@ -14,7 +14,8 @@
         "noEmit": false,
         "declaration": false,
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true
     },
     "exclude": ["src/**/dist"],
     "include": ["src/**/*"]
