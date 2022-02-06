@@ -15,14 +15,12 @@ export default class extends Controller {
             width: '100%',
             height: '100%',
             propertiesPanel: {
-                parent: '#bpmn-properties-panel'
+                parent: '#bpmn-properties-panel',
             },
             keyboard: {
-                bindTo: document
+                bindTo: document,
             },
-            additionalModules: [
-                propertiesPanel
-            ]
+            additionalModules: [propertiesPanel],
         };
     }
     connect() {
@@ -39,7 +37,7 @@ export default class extends Controller {
         else {
             this.modelerConfig.additionalModules.push(propertiesProviderCamunda);
             this.modelerConfig.moddleExtensions = {
-                camunda: camundaModdleDescriptor
+                camunda: camundaModdleDescriptor,
             };
         }
         this.modeler = new Modeler(this.modelerConfig);
@@ -47,11 +45,10 @@ export default class extends Controller {
         this._dispatchEvent('bpmn-modeler:connect', { modeler: this.modeler }, true);
     }
     loadDiagram() {
-        this.modeler.importXML(this.payload.xml)
+        this.modeler
+            .importXML(this.payload.xml)
             .then(() => {
-            this.modeler
-                .get('canvas')
-                .zoom('fit-viewport');
+            this.modeler.get('canvas').zoom('fit-viewport');
         })
             .catch((err) => {
             console.error('Could not import BPMN 2.0 diagram', err);
@@ -59,11 +56,14 @@ export default class extends Controller {
     }
     async saveBpmn() {
         const { xml } = await this.modeler.saveXML({ format: true });
-        axios.post(this.payload.config.saveUrl, {
-            xml: xml
-        }).then(() => {
+        axios
+            .post(this.payload.config.saveUrl, {
+            xml: xml,
+        })
+            .then(() => {
             alert('Success saved');
-        }).catch((err) => {
+        })
+            .catch((err) => {
             alert('Error on saving!!!');
             console.error('Error on saving!!!', err);
         });

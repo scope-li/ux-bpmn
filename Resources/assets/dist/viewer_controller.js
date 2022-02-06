@@ -1,12 +1,12 @@
 'use strict';
 import { Controller } from '@hotwired/stimulus';
-import Viewer from "bpmn-js/lib/Viewer";
-import NavigatedViewer from "bpmn-js/lib/NavigatedViewer";
+import Viewer from 'bpmn-js/lib/Viewer';
+import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer';
 export default class extends Controller {
     constructor() {
         super(...arguments);
         this.viewerConfig = {
-            container: '#bpmn-viewer'
+            container: '#bpmn-viewer',
         };
     }
     connect() {
@@ -27,14 +27,15 @@ export default class extends Controller {
         this._dispatchEvent('bpmn-viewer:connect', this.viewer, true);
     }
     loadDiagram() {
-        this.viewer.importXML(this.payload.xml)
+        this.viewer
+            .importXML(this.payload.xml)
             .then(() => {
             const canvas = this.viewer.get('canvas');
             canvas.zoom('fit-viewport');
-            this.payload.config.flow.forEach(flowId => {
+            this.payload.config.flow.forEach((flowId) => {
                 canvas.addMarker(flowId, this.payload.config.flow_class);
             });
-            this.payload.config.current.forEach(currentId => {
+            this.payload.config.current.forEach((currentId) => {
                 canvas.addMarker(currentId, this.payload.config.current_class);
             });
         })
