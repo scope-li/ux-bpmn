@@ -23,7 +23,7 @@ describe('ModelerController', function () {
                  data-testid="modeler"
                  data-event-prefix="bpmn-modeler"
                  data-controller="scopeli--ux-bpmn--modeler" 
-                 data-view="${dataView}" >
+                 data-scopeli--ux-bpmn--modeler-view-value="${dataView}" >
                 <div id="bpmn-menu">
                     <button data-action="scopeli--ux-bpmn--modeler#saveBpmn" title="Save">
                         <i class="fas fa-save"></i>

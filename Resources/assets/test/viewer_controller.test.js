@@ -23,7 +23,7 @@ describe('ViewerController', function () {
                  data-testid="viewer"
                  data-event-prefix="bpmn-viewer"
                  data-controller="check scopeli--ux-bpmn--viewer" 
-                 data-view="${dataView}" >
+                 data-scopeli--ux-bpmn--viewer-view-value="${dataView}" >
             </div>
         `);
     });

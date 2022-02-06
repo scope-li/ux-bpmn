@@ -15,7 +15,7 @@ import Viewer from 'bpmn-js/lib/Viewer';
 // @ts-ignore
 import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer';
 
-interface ViewerModel {
+interface ViewerPayload {
     type: 'default' | 'navigated';
     xml: string;
     config: {
@@ -31,24 +31,21 @@ interface ViewerConfig {
 }
 
 export default class extends Controller {
+    readonly viewValue: ViewerPayload;
+
     private viewer: Viewer | NavigatedViewer;
-    private payload: ViewerModel;
     private viewerConfig: ViewerConfig = {
         container: '#bpmn-viewer',
     };
 
+    static values = {
+        view: Object,
+    };
+
     connect() {
-        const jsonData: string | null = this.element.getAttribute('data-view');
-        if (jsonData === null) {
-            new Error('The data-view attribute is null.');
-            return;
-        }
+        this._dispatchEvent('bpmn-viewer:pre-connect', this.viewValue, true);
 
-        this.payload = JSON.parse(jsonData);
-
-        this._dispatchEvent('bpmn-viewer:pre-connect', this.payload, true);
-
-        if ('default' === this.payload.type) {
+        if ('default' === this.viewValue.type) {
             this.viewer = new Viewer(this.viewerConfig);
         } else {
             this.viewer = new NavigatedViewer(this.viewerConfig);
@@ -61,17 +58,17 @@ export default class extends Controller {
 
     loadDiagram() {
         this.viewer
-            .importXML(this.payload.xml)
+            .importXML(this.viewValue.xml)
             .then(() => {
                 const canvas = this.viewer.get('canvas');
                 canvas.zoom('fit-viewport');
 
-                this.payload.config.flow.forEach((flowId) => {
-                    canvas.addMarker(flowId, this.payload.config.flow_class);
+                this.viewValue.config.flow.forEach((flowId) => {
+                    canvas.addMarker(flowId, this.viewValue.config.flow_class);
                 });
 
-                this.payload.config.current.forEach((currentId) => {
-                    canvas.addMarker(currentId, this.payload.config.current_class);
+                this.viewValue.config.current.forEach((currentId) => {
+                    canvas.addMarker(currentId, this.viewValue.config.current_class);
                 });
             })
             .catch((err: any) => {
@@ -79,7 +76,7 @@ export default class extends Controller {
             });
     }
 
-    _dispatchEvent(name: string, payload: Viewer | NavigatedViewer | ViewerModel, bubbles = false) {
+    _dispatchEvent(name: string, payload: Viewer | NavigatedViewer | ViewerPayload, bubbles = false) {
         this.element.dispatchEvent(new CustomEvent(name, { detail: payload, bubbles: bubbles }));
     }
 }

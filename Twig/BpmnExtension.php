@@ -13,12 +13,20 @@ namespace Scopeli\UxBpmn\Twig;
 
 use Scopeli\UxBpmn\Model\Modeler;
 use Scopeli\UxBpmn\Model\Viewer;
+use Symfony\WebpackEncoreBundle\Twig\StimulusTwigExtension;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class BpmnExtension extends AbstractExtension
 {
+    private StimulusTwigExtension $stimulus;
+
+    public function __construct(StimulusTwigExtension $stimulusTwigExtension)
+    {
+        $this->stimulus = $stimulusTwigExtension;
+    }
+
     public function getFunctions(): array
     {
         return [
@@ -39,10 +47,15 @@ class BpmnExtension extends AbstractExtension
     {
         $viewer->setAttributes($attributes);
 
+        $controllers = [];
+        if ($viewer->getDataController()) {
+            $controllers[$viewer->getDataController()] = [];
+        }
+        $controllers['@scopeli/ux-bpmn/viewer'] = ['view' => $viewer->createView()];
+
         $html = sprintf(
-            '<div id="bpmn-viewer" data-controller="%s" data-view="%s" %s></div>',
-            $viewer->getDataController() ?? 'scopeli--ux-bpmn--viewer',
-            twig_escape_filter($env, json_encode($viewer->createView()), 'html_attr'),
+            '<div id="bpmn-viewer" %s %s>',
+            $this->stimulus->renderStimulusController($env, $controllers),
             $this->getAttributs($viewer->getAttributes())
         );
 
@@ -53,13 +66,18 @@ class BpmnExtension extends AbstractExtension
     {
         $modeler->setAttributes($attributes);
 
+        $controllers = [];
+        if ($modeler->getDataController()) {
+            $controllers[$modeler->getDataController()] = [];
+        }
+        $controllers['@scopeli/ux-bpmn/modeler'] = ['view' => $modeler->createView()];
+
         $html = sprintf(
-            '<div id="bpmn-modeler" data-controller="%s" data-view="%s" %s>'.
+            '<div id="bpmn-modeler" %s %s>'.
             '%s<div id="bpmn-show-xml" style="display: none;"></div>'.
             '<div id="bpmn-body"><div id="bpmn-container"></div><div id="bpmn-properties-panel"></div></div>'.
             '</div>',
-            $modeler->getDataController() ?? 'scopeli--ux-bpmn--modeler',
-            twig_escape_filter($env, json_encode($modeler->createView()), 'html_attr'),
+            $this->stimulus->renderStimulusController($env, $controllers),
             $this->getAttributs($modeler->getAttributes()),
             $this->getMenu($modeler)
         );

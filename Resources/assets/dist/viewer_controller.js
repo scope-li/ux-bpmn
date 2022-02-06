@@ -2,7 +2,7 @@
 import { Controller } from '@hotwired/stimulus';
 import Viewer from 'bpmn-js/lib/Viewer';
 import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer';
-export default class extends Controller {
+export default class default_1 extends Controller {
     constructor() {
         super(...arguments);
         this.viewerConfig = {
@@ -10,14 +10,8 @@ export default class extends Controller {
         };
     }
     connect() {
-        const jsonData = this.element.getAttribute('data-view');
-        if (jsonData === null) {
-            new Error('The data-view attribute is null.');
-            return;
-        }
-        this.payload = JSON.parse(jsonData);
-        this._dispatchEvent('bpmn-viewer:pre-connect', this.payload, true);
-        if ('default' === this.payload.type) {
+        this._dispatchEvent('bpmn-viewer:pre-connect', this.viewValue, true);
+        if ('default' === this.viewValue.type) {
             this.viewer = new Viewer(this.viewerConfig);
         }
         else {
@@ -28,15 +22,15 @@ export default class extends Controller {
     }
     loadDiagram() {
         this.viewer
-            .importXML(this.payload.xml)
+            .importXML(this.viewValue.xml)
             .then(() => {
             const canvas = this.viewer.get('canvas');
             canvas.zoom('fit-viewport');
-            this.payload.config.flow.forEach((flowId) => {
-                canvas.addMarker(flowId, this.payload.config.flow_class);
+            this.viewValue.config.flow.forEach((flowId) => {
+                canvas.addMarker(flowId, this.viewValue.config.flow_class);
             });
-            this.payload.config.current.forEach((currentId) => {
-                canvas.addMarker(currentId, this.payload.config.current_class);
+            this.viewValue.config.current.forEach((currentId) => {
+                canvas.addMarker(currentId, this.viewValue.config.current_class);
             });
         })
             .catch((err) => {
@@ -47,3 +41,6 @@ export default class extends Controller {
         this.element.dispatchEvent(new CustomEvent(name, { detail: payload, bubbles: bubbles }));
     }
 }
+default_1.values = {
+    view: Object,
+};

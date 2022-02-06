@@ -52,8 +52,9 @@ interface ModelerConfig {
 }
 
 export default class extends Controller {
+    readonly viewValue: ModelerPayload;
+
     private modeler: Modeler;
-    private payload: ModelerPayload;
     private modelerConfig: ModelerConfig = {
         container: '#bpmn-container',
         width: '100%',
@@ -67,18 +68,14 @@ export default class extends Controller {
         additionalModules: [propertiesPanel],
     };
 
+    static values = {
+        view: Object,
+    };
+
     connect() {
-        const jsonData: string | null = this.element.getAttribute('data-view');
-        if (jsonData === null) {
-            new Error('The data-view attribute is null.');
-            return;
-        }
+        this._dispatchEvent('bpmn-modeler:pre-connect', this.viewValue, true);
 
-        this.payload = JSON.parse(jsonData);
-
-        this._dispatchEvent('bpmn-modeler:pre-connect', this.payload, true);
-
-        if ('default' === this.payload.type) {
+        if ('default' === this.viewValue.type) {
             this.modelerConfig.additionalModules.push(propertiesProviderBpmn);
         } else {
             this.modelerConfig.additionalModules.push(propertiesProviderCamunda);
@@ -96,7 +93,7 @@ export default class extends Controller {
 
     loadDiagram() {
         this.modeler
-            .importXML(this.payload.xml)
+            .importXML(this.viewValue.xml)
             .then(() => {
                 this.modeler.get('canvas').zoom('fit-viewport');
             })
@@ -108,7 +105,7 @@ export default class extends Controller {
     async saveBpmn() {
         const { xml } = await this.modeler.saveXML({ format: true });
         axios
-            .post(this.payload.config.saveUrl, {
+            .post(this.viewValue.config.saveUrl, {
                 xml: xml,
             })
             .then(() => {
@@ -139,7 +136,7 @@ export default class extends Controller {
 
         const elBody: HTMLElement | null = document.getElementById('bpmn-body');
         if (elBody === null) {
-            new Error('No element with id "bpmn-show-xml" found.');
+            new Error('No element with id "bpmn-body" found.');
             return;
         }
 

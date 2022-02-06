@@ -7,7 +7,7 @@ import propertiesProviderCamunda from 'bpmn-js-properties-panel/lib/provider/cam
 import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
 import Prism from 'prismjs';
 import axios from 'axios';
-export default class extends Controller {
+export default class default_1 extends Controller {
     constructor() {
         super(...arguments);
         this.modelerConfig = {
@@ -24,14 +24,8 @@ export default class extends Controller {
         };
     }
     connect() {
-        const jsonData = this.element.getAttribute('data-view');
-        if (jsonData === null) {
-            new Error('The data-view attribute is null.');
-            return;
-        }
-        this.payload = JSON.parse(jsonData);
-        this._dispatchEvent('bpmn-modeler:pre-connect', this.payload, true);
-        if ('default' === this.payload.type) {
+        this._dispatchEvent('bpmn-modeler:pre-connect', this.viewValue, true);
+        if ('default' === this.viewValue.type) {
             this.modelerConfig.additionalModules.push(propertiesProviderBpmn);
         }
         else {
@@ -46,7 +40,7 @@ export default class extends Controller {
     }
     loadDiagram() {
         this.modeler
-            .importXML(this.payload.xml)
+            .importXML(this.viewValue.xml)
             .then(() => {
             this.modeler.get('canvas').zoom('fit-viewport');
         })
@@ -57,7 +51,7 @@ export default class extends Controller {
     async saveBpmn() {
         const { xml } = await this.modeler.saveXML({ format: true });
         axios
-            .post(this.payload.config.saveUrl, {
+            .post(this.viewValue.config.saveUrl, {
             xml: xml,
         })
             .then(() => {
@@ -84,7 +78,7 @@ export default class extends Controller {
         }
         const elBody = document.getElementById('bpmn-body');
         if (elBody === null) {
-            new Error('No element with id "bpmn-show-xml" found.');
+            new Error('No element with id "bpmn-body" found.');
             return;
         }
         if (elShowXml.style.display === 'none') {
@@ -114,3 +108,6 @@ export default class extends Controller {
         this.element.dispatchEvent(new CustomEvent(name, { detail: payload, bubbles: bubbles }));
     }
 }
+default_1.values = {
+    view: Object,
+};
