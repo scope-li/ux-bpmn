@@ -54,7 +54,7 @@ class BpmnExtension extends AbstractExtension
         $controllers['@scopeli/ux-bpmn/viewer'] = ['view' => $viewer->createView()];
 
         $html = sprintf(
-            '<div id="bpmn-viewer" %s %s>',
+            '<div id="bpmn-viewer" %s%s></div>',
             $this->stimulus->renderStimulusController($env, $controllers),
             $this->getAttributs($viewer->getAttributes())
         );
@@ -73,7 +73,7 @@ class BpmnExtension extends AbstractExtension
         $controllers['@scopeli/ux-bpmn/modeler'] = ['view' => $modeler->createView()];
 
         $html = sprintf(
-            '<div id="bpmn-modeler" %s %s>'.
+            '<div id="bpmn-modeler" %s%s>'.
             '%s<div id="bpmn-show-xml" style="display: none;"></div>'.
             '<div id="bpmn-body"><div id="bpmn-container"></div><div id="bpmn-properties-panel"></div></div>'.
             '</div>',
@@ -124,7 +124,7 @@ class BpmnExtension extends AbstractExtension
                 continue;
             }
 
-            $buffer .= sprintf('%s="%s" ', $name, $value);
+            $buffer .= sprintf(' %s="%s"', $name, $value);
         }
 
         return $buffer;

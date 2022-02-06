@@ -28,12 +28,13 @@
     "scripts": {
         "tsc:watch": "tsc --watch",
         "tsc:build": "tsc --build",
-        "lint:run": "eslint src",
-        "lint:check": "eslint src test --no-fix",
+        "lint:run": "eslint src test",
+        "lint:check": "yarn lint:run --no-fix",
+        "prettier:run": "prettier src/*.ts test/*.js *.{json,js} --write",
+        "prettier:check": "yarn prettier:run --no-write --check",
         "test:watch": "karma start",
         "test:run": "karma start --single-run",
-        "sass": "sass src:src",
-        "prettier": "prettier src/*.ts test/*.js *.{json,js} --write"
+        "sass": "sass src:src"
     },
     "peerDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
@@ -107,7 +108,7 @@
         "printWidth": 120,
         "trailingComma": "es5",
         "tabWidth": 4,
-        "jsxBracketSameLine": true,
+        "bracketSameLine": true,
         "singleQuote": true
     }
 }
