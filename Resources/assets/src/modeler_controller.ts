@@ -29,10 +29,10 @@ interface ModelerPayload {
     config: {
         saveUrl: string;
         menu: {
-            saveBpmn: {title: string, icon: string};
-            downloadBpmn: {title: string, icon: string};
-            downloadSvg: {title: string, icon: string};
-            showXml: {title: string, icon: string};
+            saveBpmn: { title: string; icon: string };
+            downloadBpmn: { title: string; icon: string };
+            downloadSvg: { title: string; icon: string };
+            showXml: { title: string; icon: string };
         };
     };
 }
@@ -59,14 +59,12 @@ export default class extends Controller {
         width: '100%',
         height: '100%',
         propertiesPanel: {
-            parent: '#bpmn-properties-panel'
+            parent: '#bpmn-properties-panel',
         },
         keyboard: {
-            bindTo: document
+            bindTo: document,
         },
-        additionalModules: [
-            propertiesPanel
-        ]
+        additionalModules: [propertiesPanel],
     };
 
     connect() {
@@ -80,13 +78,13 @@ export default class extends Controller {
 
         this._dispatchEvent('bpmn-modeler:pre-connect', this.payload, true);
 
-        if('default' === this.payload.type) {
+        if ('default' === this.payload.type) {
             this.modelerConfig.additionalModules.push(propertiesProviderBpmn);
         } else {
             this.modelerConfig.additionalModules.push(propertiesProviderCamunda);
             this.modelerConfig.moddleExtensions = {
-                camunda: camundaModdleDescriptor
-            }
+                camunda: camundaModdleDescriptor,
+            };
         }
 
         this.modeler = new Modeler(this.modelerConfig);
@@ -97,11 +95,10 @@ export default class extends Controller {
     }
 
     loadDiagram() {
-        this.modeler.importXML(this.payload.xml)
+        this.modeler
+            .importXML(this.payload.xml)
             .then(() => {
-                this.modeler
-                    .get('canvas')
-                    .zoom('fit-viewport');
+                this.modeler.get('canvas').zoom('fit-viewport');
             })
             .catch((err: any) => {
                 console.error('Could not import BPMN 2.0 diagram', err);
@@ -110,14 +107,17 @@ export default class extends Controller {
 
     async saveBpmn() {
         const { xml } = await this.modeler.saveXML({ format: true });
-        axios.post(this.payload.config.saveUrl, {
-            xml: xml
-        }).then(() => {
-            alert('Success saved');
-        }).catch((err: any) => {
-            alert('Error on saving!!!');
-            console.error('Error on saving!!!', err);
-        });
+        axios
+            .post(this.payload.config.saveUrl, {
+                xml: xml,
+            })
+            .then(() => {
+                alert('Success saved');
+            })
+            .catch((err: any) => {
+                alert('Error on saving!!!');
+                console.error('Error on saving!!!', err);
+            });
     }
 
     async downloadBpmn() {
@@ -168,6 +168,6 @@ export default class extends Controller {
     }
 
     _dispatchEvent(name: string, payload: Modeler | ModelerPayload, bubbles = false) {
-        this.element.dispatchEvent(new CustomEvent(name, {detail: payload, bubbles: bubbles}));
+        this.element.dispatchEvent(new CustomEvent(name, { detail: payload, bubbles: bubbles }));
     }
 }

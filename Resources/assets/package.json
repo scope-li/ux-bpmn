@@ -1,112 +1,113 @@
 {
-  "name": "@scopeli/flow-bundle",
-  "description": "bpmn-js modeler and viewer",
-  "license": "MIT",
-  "version": "1.1.0",
-  "symfony": {
-    "controllers": {
-      "modeler": {
-        "main": "dist/modeler_controller.js",
-        "webpackMode": "eager",
-        "fetch": "eager",
-        "enabled": true,
-        "autoimport": {
-          "@scopeli/ux-bpmn/src/modeler_style.css": true
+    "name": "@scopeli/flow-bundle",
+    "description": "bpmn-js modeler and viewer",
+    "license": "MIT",
+    "version": "1.1.0",
+    "symfony": {
+        "controllers": {
+            "modeler": {
+                "main": "dist/modeler_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager",
+                "enabled": true,
+                "autoimport": {
+                    "@scopeli/ux-bpmn/src/modeler_style.css": true
+                }
+            },
+            "viewer": {
+                "main": "dist/viewer_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager",
+                "enabled": true,
+                "autoimport": {
+                    "@scopeli/ux-bpmn/src/viewer_style.css": true
+                }
+            }
         }
-      },
-      "viewer": {
-        "main": "dist/viewer_controller.js",
-        "webpackMode": "eager",
-        "fetch": "eager",
-        "enabled": true,
-        "autoimport": {
-          "@scopeli/ux-bpmn/src/viewer_style.css": true
-        }
-      }
-    }
-  },
-  "scripts": {
-    "tsc:watch": "tsc --watch",
-    "tsc:build": "tsc --build",
-    "lint:run": "eslint src",
-    "lint:check": "eslint src test --no-fix",
-    "test:watch": "karma start",
-    "test:run": "karma start --single-run",
-    "sass": "sass src:src"
-  },
-  "peerDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "@hotwired/stimulus": "^3.0.0",
-    "axios": "^0.25.0",
-    "bpmn-js": "^8.9.1",
-    "bpmn-js-properties-panel": "^0.46.0",
-    "camunda-bpmn-moddle": "^6.1.1",
-    "prismjs": "^1.26.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/preset-env": "^7.16.0",
-    "@babel/preset-typescript": "^7.16.0",
-    "@babel/runtime": "^7.17.0",
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "@hotwired/stimulus": "^3.0.0",
-    "@symfony/stimulus-testing": "^2.0.1",
-    "@types/jasmine": "^3.10.3",
-    "@types/prismjs": "^1.26.0",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
-    "axios": "^0.25.0",
-    "bpmn-js": "^8.9.1",
-    "bpmn-js-properties-panel": "^0.46.0",
-    "camunda-bpmn-moddle": "^6.1.1",
-    "eslint": "^8.3.0",
-    "eslint-config-prettier": "^8.3.0",
-    "jasmine-core": "^4.0.0",
-    "karma": "^6.3.15",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-jasmine": "^4.0.1",
-    "karma-webpack": "^5.0.0",
-    "prettier": "^2.5.1",
-    "prismjs": "^1.26.0",
-    "sass": "^1.49.7",
-    "typescript": "^4.5.5",
-    "webpack": "^5.68.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "prettier",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "rules": {
-      "@typescript-eslint/ban-ts-comment": "off",
-      "@typescript-eslint/no-explicit-any": "off"
     },
-    "env": {
-      "browser": true
+    "scripts": {
+        "tsc:watch": "tsc --watch",
+        "tsc:build": "tsc --build",
+        "lint:run": "eslint src",
+        "lint:check": "eslint src test --no-fix",
+        "test:watch": "karma start",
+        "test:run": "karma start --single-run",
+        "sass": "sass src:src",
+        "prettier": "prettier src/*.ts test/*.js *.{json,js} --write"
     },
-    "overrides": [
-      {
-        "files": [
-          "**/*.test.js"
+    "peerDependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.4",
+        "@hotwired/stimulus": "^3.0.0",
+        "axios": "^0.25.0",
+        "bpmn-js": "^8.9.1",
+        "bpmn-js-properties-panel": "^0.46.0",
+        "camunda-bpmn-moddle": "^6.1.1",
+        "prismjs": "^1.26.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@babel/preset-typescript": "^7.16.0",
+        "@babel/runtime": "^7.17.0",
+        "@fortawesome/fontawesome-free": "^5.15.4",
+        "@hotwired/stimulus": "^3.0.0",
+        "@symfony/stimulus-testing": "^2.0.1",
+        "@types/jasmine": "^3.10.3",
+        "@types/prismjs": "^1.26.0",
+        "@typescript-eslint/eslint-plugin": "^5.10.2",
+        "@typescript-eslint/parser": "^5.10.2",
+        "axios": "^0.25.0",
+        "bpmn-js": "^8.9.1",
+        "bpmn-js-properties-panel": "^0.46.0",
+        "camunda-bpmn-moddle": "^6.1.1",
+        "eslint": "^8.3.0",
+        "eslint-config-prettier": "^8.3.0",
+        "jasmine-core": "^4.0.0",
+        "karma": "^6.3.15",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-jasmine": "^4.0.1",
+        "karma-webpack": "^5.0.0",
+        "prettier": "^2.5.1",
+        "prismjs": "^1.26.0",
+        "sass": "^1.49.7",
+        "typescript": "^4.5.5",
+        "webpack": "^5.68.0"
+    },
+    "eslintConfig": {
+        "root": true,
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
         ],
+        "extends": [
+            "eslint:recommended",
+            "prettier",
+            "plugin:@typescript-eslint/eslint-recommended",
+            "plugin:@typescript-eslint/recommended"
+        ],
+        "rules": {
+            "@typescript-eslint/ban-ts-comment": "off",
+            "@typescript-eslint/no-explicit-any": "off"
+        },
         "env": {
-          "jest": true
-        }
-      }
-    ]
-  },
-  "prettier": {
-    "printWidth": 120,
-    "trailingComma": "es5",
-    "tabWidth": 4,
-    "jsxBracketSameLine": true,
-    "singleQuote": true
-  }
+            "browser": true
+        },
+        "overrides": [
+            {
+                "files": [
+                    "**/*.test.js"
+                ],
+                "env": {
+                    "jest": true
+                }
+            }
+        ]
+    },
+    "prettier": {
+        "printWidth": 120,
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "jsxBracketSameLine": true,
+        "singleQuote": true
+    }
 }

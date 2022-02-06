@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import {Application, Controller} from "@hotwired/stimulus";
+import { Application, Controller } from '@hotwired/stimulus';
 
 export class CheckController extends Controller {
     connect() {
@@ -36,7 +36,7 @@ export const dataToJsonAttribute = (data) => {
     container.dataset.foo = JSON.stringify(data);
 
     return container.outerHTML.match(/data-foo="(.+)"/)[1];
-}
+};
 
 export const bpmnDefinition = `
 <?xml version="1.0" encoding="UTF-8"?>

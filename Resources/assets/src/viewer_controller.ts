@@ -11,9 +11,9 @@
 
 import { Controller } from '@hotwired/stimulus';
 // @ts-ignore
-import Viewer from "bpmn-js/lib/Viewer";
+import Viewer from 'bpmn-js/lib/Viewer';
 // @ts-ignore
-import NavigatedViewer from "bpmn-js/lib/NavigatedViewer";
+import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer';
 
 interface ViewerModel {
     type: 'default' | 'navigated';
@@ -34,7 +34,7 @@ export default class extends Controller {
     private viewer: Viewer | NavigatedViewer;
     private payload: ViewerModel;
     private viewerConfig: ViewerConfig = {
-        container: '#bpmn-viewer'
+        container: '#bpmn-viewer',
     };
 
     connect() {
@@ -48,7 +48,7 @@ export default class extends Controller {
 
         this._dispatchEvent('bpmn-viewer:pre-connect', this.payload, true);
 
-        if('default' === this.payload.type) {
+        if ('default' === this.payload.type) {
             this.viewer = new Viewer(this.viewerConfig);
         } else {
             this.viewer = new NavigatedViewer(this.viewerConfig);
@@ -56,20 +56,21 @@ export default class extends Controller {
 
         this.loadDiagram();
 
-        this._dispatchEvent('bpmn-viewer:connect', this.viewer , true);
+        this._dispatchEvent('bpmn-viewer:connect', this.viewer, true);
     }
 
     loadDiagram() {
-        this.viewer.importXML(this.payload.xml)
+        this.viewer
+            .importXML(this.payload.xml)
             .then(() => {
                 const canvas = this.viewer.get('canvas');
                 canvas.zoom('fit-viewport');
 
-                this.payload.config.flow.forEach(flowId => {
+                this.payload.config.flow.forEach((flowId) => {
                     canvas.addMarker(flowId, this.payload.config.flow_class);
                 });
 
-                this.payload.config.current.forEach(currentId => {
+                this.payload.config.current.forEach((currentId) => {
                     canvas.addMarker(currentId, this.payload.config.current_class);
                 });
             })
@@ -79,6 +80,6 @@ export default class extends Controller {
     }
 
     _dispatchEvent(name: string, payload: Viewer | NavigatedViewer | ViewerModel, bubbles = false) {
-        this.element.dispatchEvent(new CustomEvent(name, {detail: payload, bubbles: bubbles}));
+        this.element.dispatchEvent(new CustomEvent(name, { detail: payload, bubbles: bubbles }));
     }
 }

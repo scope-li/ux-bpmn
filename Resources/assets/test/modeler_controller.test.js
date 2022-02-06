@@ -7,12 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import {clearDOM, mountDOM} from '@symfony/stimulus-testing';
-import {getByTestId} from '@testing-library/dom';
-import {bpmnDefinition, dataToJsonAttribute, startStimulus} from "./helper";
-import ModelerController from "../dist/modeler_controller";
+import { clearDOM, mountDOM } from '@symfony/stimulus-testing';
+import { getByTestId } from '@testing-library/dom';
+import { bpmnDefinition, dataToJsonAttribute, startStimulus } from './helper';
+import ModelerController from '../dist/modeler_controller';
 
-describe("ModelerController", function() {
+describe('ModelerController', function () {
     let container;
     let application;
 
@@ -58,35 +58,35 @@ describe("ModelerController", function() {
 
         application = startStimulus('scopeli--ux-bpmn--modeler', ModelerController);
 
-        setTimeout(function() {
+        setTimeout(function () {
             expect(getByTestId(container, 'modeler')).toHaveClass('pre-connected');
             expect(getByTestId(container, 'modeler')).toHaveClass('connected');
         }, 1000);
     });
-})
+});
 
 const data = {
-    type: "default",
+    type: 'default',
     xml: bpmnDefinition,
     config: {
-        saveUrl: "/save",
+        saveUrl: '/save',
         menu: {
             saveBpmn: {
-                title: "Save",
-                icon: "fas fa-save"
+                title: 'Save',
+                icon: 'fas fa-save',
             },
             downloadBpmn: {
-                title: "Download BPMN",
-                icon: "fas fa-download"
+                title: 'Download BPMN',
+                icon: 'fas fa-download',
             },
             downloadSvg: {
-                title: "Download SVG",
-                icon: "fas fa-image"
+                title: 'Download SVG',
+                icon: 'fas fa-image',
             },
             showXml: {
-                title: "XML",
-                icon: "fas fa-code"
-            }
-        }
-    }
+                title: 'XML',
+                icon: 'fas fa-code',
+            },
+        },
+    },
 };
